@@ -24,7 +24,7 @@ app.get("/bl",(req,res)=>{
     })
 });
 app.get("/pl",(req,res)=>{
-    nstore.find({},{"product":1,"_id":0},(err,val)=>{ //request all data from menu collection
+    nstore.find({},(err,val)=>{ //request all data from menu collection
         res.send(val)  
     })
 });
