@@ -41,11 +41,11 @@ app.post("/np",(req,res)=>{
         }
         else
         {
+            let ar=[];
+            ar.push(body.product)
             let val = new nstore({      // fitting request to menu schema
             brand:body.brand,
-            product:body.product,
-            price:body.price,
-            unit:body.unit
+            product:ar
             });
             val.save().then(doc=>{   // saving new item to  mongoose
             res.write("sucess");
