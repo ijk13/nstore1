@@ -28,13 +28,31 @@ app.get("/pl",(req,res)=>{
         res.send(val)  
     })
 });
-app.post("/peefb",(req,res)=>{
-    
-    val.save().then(doc=>{   // saving new item to  mongoose
-        //console.log(doc)
-        res.write("sucess");
-        res.end();
-    }) 
+app.post("/np",(req,res)=>{
+    const body = req.body;
+     nstore.findOne({brand:body.brand},(err,example)=>{
+        if(example)
+        {
+            example.product.push(body.product);
+            example.save().then(doc=>{   // saving new item to  mongoose
+            res.write("sucess");
+            res.end();
+            });
+        }
+        else
+        {
+            let val = new nstore({      // fitting request to menu schema
+            brand:body.brand,
+            product:body.product,
+            price:body.price,
+            unit:body.unit
+            });
+            val.save().then(doc=>{   // saving new item to  mongoose
+            res.write("sucess");
+            res.end();
+            }) 
+        }
+    })  // copyi
 });
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, ()=>{
